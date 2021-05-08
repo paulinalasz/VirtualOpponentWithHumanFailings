@@ -22,11 +22,11 @@ public class EnemyController : MonoBehaviour {
     void Update() {
         float distance = Vector3.Distance(movement.AgentTransform.position, movement.Agent.destination);
 
-        if (distance < 1f) {
+        if (distance < 2f) {
             movement.wander();
         }
 
-        reactToSounds(enemyEar.SoundsHeard);
+        //reactToSounds(enemyEar.SoundsHeard);
     }
 
     private void reactToSounds(List<Sound> soundsPlaying) {
@@ -99,7 +99,6 @@ public class EnemyController : MonoBehaviour {
             print("that was my own footsteps and I can ignore it!");
         }
         else {
-            print("footsteps detected");
             agent.SetDestination(sound.Origin);
         }
     }

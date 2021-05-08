@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Ear : MonoBehaviour {
@@ -19,6 +20,8 @@ public class Ear : MonoBehaviour {
     private void Update() {
         getSoundsHeard();
 
+        print(SoundsHeard.Count);
+
         foreach (Sound sound in SoundsHeard) {
             print(sound.File);
         }
@@ -27,40 +30,37 @@ public class Ear : MonoBehaviour {
     private void getSoundsHeard() {
         foreach (Sound sound in GlobalListener.SoundsPlaying) {
             float distance = Vector3.Distance(agentTransform.position, sound.Origin);
-            List<Sound> temp = new List<Sound>();
 
             switch (sound.File) {
                 case "splosh":
-                    if (distance <= sploshHearingRange) {
-                        temp.Add(sound);
+                    if (distance <= sploshHearingRange && !SoundsHeard.Contains(sound)) {
+                        SoundsHeard.Add(sound);
                     }
                     break;
                 case "swimming":
-                    if (distance <= swimmingHearingRange) {
-                        temp.Add(sound);
+                    if (distance <= swimmingHearingRange && !SoundsHeard.Contains(sound)) {
+                        SoundsHeard.Add(sound);
                     }
                     break;
                 case "mudfootsteps":
-                    if (distance <= mudfootstepsHearingRange) {
-                        temp.Add(sound);
+                    if (distance <= mudfootstepsHearingRange && !SoundsHeard.Contains(sound)) {
+                        SoundsHeard.Add(sound);
                     }
                     break;
                 case "metalsteps":
-                    if (distance <= metalstepsHearingRange) {
-                        temp.Add(sound);
+                    if (distance <= metalstepsHearingRange && !SoundsHeard.Contains(sound)) {
+                        SoundsHeard.Add(sound);
                     }
                     break;
                 case "footsteps":
-                    if (distance <= footstepsHearingRange) {
-                        temp.Add(sound);
+                    if (distance <= footstepsHearingRange && !SoundsHeard.Contains(sound)) {
+                        SoundsHeard.Add(sound);
                     }
                     break;
                 default:
                     print("no sound detected");
                     break;
             }
-
-            this.SoundsHeard = temp;
         }
     }
 
