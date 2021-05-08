@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System;
 
-public class SFXSurface : MonoBehaviour {
+public class SFXTriggerSurface : MonoBehaviour {
 
-    [SerializeField] AudioSource movementtemp;
-    [SerializeField] AudioSource initialtemp;
+    [SerializeField] AudioSource movementAudio;
+    [SerializeField] AudioSource initialAudio;
 
     private Sound movement;
     private Sound initial;
 
     private void Start() {
-        movement = new Sound(movementtemp);
-        initial = new Sound(initialtemp);
+        movement = new Sound(movementAudio);
+        initial = new Sound(initialAudio);
     }
 
     private void Update() {
