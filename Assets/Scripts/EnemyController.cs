@@ -11,9 +11,11 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] Ear enemyEar;
 
     private Transform agentTransform;
+    private NavMeshAgent agent;
 
     private void Start() {
         agentTransform = GetComponent<Transform>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -57,47 +59,48 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void reactToSplosh(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
             print("that was my own splosh and I can ignore it!");
         }
         else {
-            print("someone elses splosh!");
+            agent.SetDestination(sound.Origin);
         }
     }
 
     private void reactToSwimming(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
             print("that was my own swim and I can ignore it!");
         }
         else {
-            print("someone elses swim!");
+            agent.SetDestination(sound.Origin);
         }
     }
 
     private void reactToMud(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
             print("that was my own mud and I can ignore it!");
         }
         else {
-            print("someone elses mud!");
+            agent.SetDestination(sound.Origin);
         }
     }
 
     private void reactToMetal(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
             print("that was my own metal and I can ignore it!");
         }
         else {
-            print("someone elses metal!");
+            agent.SetDestination(sound.Origin);
         }
     }
 
     private void reacttoFootsteps(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
             print("that was my own footsteps and I can ignore it!");
         }
         else {
-            print("someone elses footsteps!");
+            print("footsteps detected");
+            agent.SetDestination(sound.Origin);
         }
     }
 }
