@@ -22,7 +22,8 @@ public class EnemyEar : MonoBehaviour {
     public void updateSoundsPlaying(Sound sound) {
         if (!SoundsPlaying.Contains(sound)) {
             this.SoundsPlaying.Add(sound);
-        } else {
+        }
+        else {
             this.removeSoundsPlaying(sound);
             this.SoundsPlaying.Add(sound);
         }
@@ -33,28 +34,30 @@ public class EnemyEar : MonoBehaviour {
     }
 
     private void removeDistantSounds() {
-        foreach (Sound sound in this.SoundsPlaying) {
+        List<Sound> toRemove = new List<Sound>();;
+
+        foreach (Sound sound in SoundsPlaying) {
             float distance = Vector3.Distance(agentTransform.position, sound.Origin);
 
             switch (sound.File) {
                 case "splosh":
                     if (distance >= sploshHearingRange) {
-                        removeSoundsPlaying(sound);
+                        toRemove.Add(sound);
                     }
                     break;
                 case "swimming":
                     if (distance >= swimmingHearingRange) {
-                       removeSoundsPlaying(sound);
+                        toRemove.Add(sound);
                     }
                     break;
                 case "mudfootsteps":
                     if (distance >= mudfootstepsHearingRange) {
-                        removeSoundsPlaying(sound);
+                        toRemove.Add(sound);
                     }
                     break;
                 case "metalsteps":
                     if (distance >= metalstepsHearingRange) {
-                        removeSoundsPlaying(sound);
+                        toRemove.Add(sound);
                     }
                     break;
                 default:

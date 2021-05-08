@@ -12,15 +12,9 @@ public class Player : MonoBehaviour
 
     private Vector3 movement;
 
-    private AudioSource footsteps;
-
     // Start is called before the first frame update
-    void Start()
-    {
-        footsteps = GetComponent<AudioSource>();
+    void Start() {
         rigidBody = GetComponent<Rigidbody>();
-
-        footsteps.Stop();
     }
 
     void Update() {
@@ -45,23 +39,17 @@ public class Player : MonoBehaviour
             horizontalMovement = -1;
         }
 
-        playFootsteps();
-
         if (Input.GetKeyUp(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
             verticalMovement = 0;
-            footsteps.Stop();
         }
         if (Input.GetKeyUp(KeyCode.S) && !Input.GetKey(KeyCode.W)) {
             verticalMovement = 0;
-            footsteps.Stop();
         }
         if (Input.GetKeyUp(KeyCode.A) && !Input.GetKey(KeyCode.D)) {
             horizontalMovement = 0;
-            footsteps.Stop();
         }
         if (Input.GetKeyUp(KeyCode.D) && !Input.GetKey(KeyCode.A)) {
             horizontalMovement = 0;
-            footsteps.Stop();
         }
     }
 
@@ -70,14 +58,5 @@ public class Player : MonoBehaviour
         movement = movement * speed;
 
         rigidBody.AddForce(movement);
-    }
-
-    void playFootsteps() {
-        if (!footsteps.isPlaying) {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
-                footsteps.Play(0);
-            }
-        }
-
     }
 }
