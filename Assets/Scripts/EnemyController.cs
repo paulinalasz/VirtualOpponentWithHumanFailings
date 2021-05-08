@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour {
             movement.wander();
         }
 
-        //reactToSounds(enemyEar.SoundsHeard);
+        reactToSounds(enemyEar.SoundsHeard);
     }
 
     private void reactToSounds(List<Sound> soundsPlaying) {

@@ -28,33 +28,35 @@ public class Ear : MonoBehaviour {
     }
 
     private void getSoundsHeard() {
+        List<Sound> temp = new List<Sound>(0);
+
         foreach (Sound sound in GlobalListener.SoundsPlaying) {
             float distance = Vector3.Distance(agentTransform.position, sound.Origin);
 
             switch (sound.File) {
                 case "splosh":
                     if (distance <= sploshHearingRange && !SoundsHeard.Contains(sound)) {
-                        SoundsHeard.Add(sound);
+                        temp.Add(sound);
                     }
                     break;
                 case "swimming":
                     if (distance <= swimmingHearingRange && !SoundsHeard.Contains(sound)) {
-                        SoundsHeard.Add(sound);
+                        temp.Add(sound);
                     }
                     break;
                 case "mudfootsteps":
                     if (distance <= mudfootstepsHearingRange && !SoundsHeard.Contains(sound)) {
-                        SoundsHeard.Add(sound);
+                        temp.Add(sound);
                     }
                     break;
                 case "metalsteps":
                     if (distance <= metalstepsHearingRange && !SoundsHeard.Contains(sound)) {
-                        SoundsHeard.Add(sound);
+                        temp.Add(sound);
                     }
                     break;
                 case "footsteps":
                     if (distance <= footstepsHearingRange && !SoundsHeard.Contains(sound)) {
-                        SoundsHeard.Add(sound);
+                        temp.Add(sound);
                     }
                     break;
                 default:
@@ -62,6 +64,8 @@ public class Ear : MonoBehaviour {
                     break;
             }
         }
+
+        this.SoundsHeard = temp;
     }
 
     public List<Sound> SoundsHeard { get; set; }
