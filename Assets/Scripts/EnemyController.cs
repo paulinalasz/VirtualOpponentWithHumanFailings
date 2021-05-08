@@ -21,13 +21,13 @@ public class EnemyController : MonoBehaviour {
         reactToSounds(ear.SoundsPlaying);
     }
 
-    public void reactToSounds(List<Sound> soundsPlaying) {
+    private void reactToSounds(List<Sound> soundsPlaying) {
         foreach (Sound sound in soundsPlaying) {
             reactToSound(sound);
         }
     }
 
-    public void reactToSound(Sound sound) {
+    private void reactToSound(Sound sound) {
         switch (sound.File) {
             case "splosh":
                 print("splosh: " + sound.Origin);
@@ -47,5 +47,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
+    private void reactToSplosh() {
 
+    }
 }
