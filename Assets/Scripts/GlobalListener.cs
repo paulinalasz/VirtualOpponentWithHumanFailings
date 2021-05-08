@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalListener : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public static class GlobalListener {
+
+    public static List<Sound> SoundsPlaying = new List<Sound>();
+
+    public static void updateSoundsPlaying(Sound sound) {
+        if (!SoundsPlaying.Contains(sound)) {
+            SoundsPlaying.Add(sound);
+        }
+        else {
+            removeSoundsPlaying(sound);
+            SoundsPlaying.Add(sound);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public static void removeSoundsPlaying(Sound sound) {
+        SoundsPlaying.Remove(sound);
     }
 }

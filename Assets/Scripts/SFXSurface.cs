@@ -4,8 +4,6 @@ using System;
 
 public class SFXSurface : MonoBehaviour {
 
-    [SerializeField]  EnemyEar enemyEar;
-
     [SerializeField] AudioSource movementtemp;
     [SerializeField] AudioSource initialtemp;
 
@@ -19,16 +17,16 @@ public class SFXSurface : MonoBehaviour {
 
     private void Update() {
         if (!initial.isPlaying()) {
-            enemyEar.removeSoundsPlaying(initial);
+            GlobalListener.removeSoundsPlaying(initial);
         }
         if (!movement.isPlaying()) {
-            enemyEar.removeSoundsPlaying(movement);
+            GlobalListener.removeSoundsPlaying(movement);
         }
         if (initial.isPlaying()) {
-            enemyEar.updateSoundsPlaying(initial);
+            GlobalListener.updateSoundsPlaying(initial);
         }
         if (movement.isPlaying()) {
-            enemyEar.updateSoundsPlaying(movement);
+            GlobalListener.updateSoundsPlaying(movement);
         }
     }
 

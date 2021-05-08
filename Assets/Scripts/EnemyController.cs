@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
     public Vector3 enemyPlayerPositionGuess;
 
     [SerializeField] EnemyMovement movement;
-    [SerializeField] EnemyEar ear;
+    [SerializeField] Ear enemyEar;
 
     // Update is called once per frame
     void Update() {
@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour {
             movement.wander();
         }
 
-        reactToSounds(ear.SoundsPlaying);
+        reactToSounds(enemyEar.SoundsHeard);
     }
 
     private void reactToSounds(List<Sound> soundsPlaying) {
@@ -30,16 +30,16 @@ public class EnemyController : MonoBehaviour {
     private void reactToSound(Sound sound) {
         switch (sound.File) {
             case "splosh":
-                print("splosh: " + sound.Origin);
+                reactToSplosh();
                 break;
             case "swimming":
-                print("swim: " + sound.Origin);
+                reactToSwimming();
                 break;
             case "mudfootsteps":
-                print("mud: " + sound.Origin);
+                reactToMud();
                 break;
             case "metalsteps":
-                print("metal: " + sound.Origin);
+                reactToMetal();
                 break;
             default:
                 print("no sound detected");
@@ -48,6 +48,18 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void reactToSplosh() {
+        print("this is sploshing and I can hear it!");
+    }
 
+    private void reactToSwimming() {
+        print("this is sploshing and I can hear it!");
+    }
+
+    private void reactToMud() {
+        print("this is sploshing and I can hear it!");
+    }
+
+    private void reactToMetal() {
+        print("this is sploshing and I can hear it!");
     }
 }
