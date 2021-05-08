@@ -4,40 +4,25 @@ using System;
 
 public class SFXTriggerSurface : MonoBehaviour {
 
-    [SerializeField] AudioSource movementAudio;
-    [SerializeField] AudioSource initialAudio;
+    protected AudioSource movementAudio;
 
-    private Sound movement;
-    private Sound initial;
+    protected Sound movement;
 
     private void Start() {
+        movementAudio = GetComponent<AudioSource>();
         movement = new Sound(movementAudio);
-        initial = new Sound(initialAudio);
     }
 
     private void Update() {
-        if (!initial.isPlaying()) {
-            GlobalListener.removeSoundsPlaying(initial);
-        }
         if (!movement.isPlaying()) {
             GlobalListener.removeSoundsPlaying(movement);
-        }
-        if (initial.isPlaying()) {
-            GlobalListener.updateSoundsPlaying(initial);
         }
         if (movement.isPlaying()) {
             GlobalListener.updateSoundsPlaying(movement);
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        initial.play();
-        initial.Origin = other.GetComponent<Transform>().position;
-    }
-
-    private void OnTriggerStay(Collider other) {
-
-
+    protected void OnTriggerStay(Collider other) {
         if (other.attachedRigidbody.velocity.magnitude > 0.5) {
             movement.play();
             movement.Origin = other.GetComponent<Transform>().position;
@@ -47,7 +32,7 @@ public class SFXTriggerSurface : MonoBehaviour {
         }
     }
 
-    private void OnTriggerExit(Collider other) {
+    protected void OnTriggerExit(Collider other) {
         movement.stop();
     }
 }
