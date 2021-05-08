@@ -9,6 +9,7 @@ public class Ear : MonoBehaviour {
     [SerializeField] float swimmingHearingRange;
     [SerializeField] float mudfootstepsHearingRange;
     [SerializeField] float metalstepsHearingRange;
+    [SerializeField] float footstepsHearingRange;
 
     // Start is called before the first frame update
     void Start() {
@@ -46,6 +47,11 @@ public class Ear : MonoBehaviour {
                     break;
                 case "metalsteps":
                     if (distance <= metalstepsHearingRange) {
+                        temp.Add(sound);
+                    }
+                    break;
+                case "footsteps":
+                    if (distance <= footstepsHearingRange) {
                         temp.Add(sound);
                     }
                     break;

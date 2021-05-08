@@ -10,6 +10,12 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] EnemyMovement movement;
     [SerializeField] Ear enemyEar;
 
+    private Transform agentTransform;
+
+    private void Start() {
+        agentTransform = GetComponent<Transform>();
+    }
+
     // Update is called once per frame
     void Update() {
         float distance = Vector3.Distance(movement.AgentTransform.position, movement.Agent.destination);
@@ -27,19 +33,22 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void reactToSound(Sound sound) {
+    private void reactToSound(Sound sound) { 
         switch (sound.File) {
             case "splosh":
-                reactToSplosh();
+                reactToSplosh(sound);
                 break;
             case "swimming":
-                reactToSwimming();
+                reactToSwimming(sound);
                 break;
             case "mudfootsteps":
-                reactToMud();
+                reactToMud(sound);
                 break;
             case "metalsteps":
-                reactToMetal();
+                reactToMetal(sound);
+                break;
+            case "footsteps":
+                reacttoFootsteps(sound);
                 break;
             default:
                 print("no sound detected");
@@ -47,19 +56,48 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void reactToSplosh() {
-        print("this is sploshing and I can hear it!");
+    private void reactToSplosh(Sound sound) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+            print("that was my own splosh and I can ignore it!");
+        }
+        else {
+            print("someone elses splosh!");
+        }
     }
 
-    private void reactToSwimming() {
-        print("this is sploshing and I can hear it!");
+    private void reactToSwimming(Sound sound) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+            print("that was my own swim and I can ignore it!");
+        }
+        else {
+            print("someone elses swim!");
+        }
     }
 
-    private void reactToMud() {
-        print("this is sploshing and I can hear it!");
+    private void reactToMud(Sound sound) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+            print("that was my own mud and I can ignore it!");
+        }
+        else {
+            print("someone elses mud!");
+        }
     }
 
-    private void reactToMetal() {
-        print("this is sploshing and I can hear it!");
+    private void reactToMetal(Sound sound) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+            print("that was my own metal and I can ignore it!");
+        }
+        else {
+            print("someone elses metal!");
+        }
+    }
+
+    private void reacttoFootsteps(Sound sound) {
+        if (Vector3.Distance(sound.Origin, agentTransform.position) < 0.5) {
+            print("that was my own footsteps and I can ignore it!");
+        }
+        else {
+            print("someone elses footsteps!");
+        }
     }
 }
