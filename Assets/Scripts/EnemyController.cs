@@ -2,6 +2,7 @@
 using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class EnemyController : MonoBehaviour {
 
@@ -12,25 +13,35 @@ public class EnemyController : MonoBehaviour {
 
     private Transform agentTransform;
     private NavMeshAgent agent;
+    private Rigidbody rigidbody;
 
     private void Start() {
         agentTransform = GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update() {
         float distance = Vector3.Distance(movement.AgentTransform.position, movement.Agent.destination);
 
-        if (distance < 2f) {
+        if (distance < 1.1f || rigidbody.velocity.magnitude < 1.3f) {
             movement.wander();
         }
 
-        reactToSounds(enemyEar.SoundsHeard);
+        followLastSound(enemyEar.SoundsHeard);
     }
 
-    private void reactToSounds(List<Sound> soundsPlaying) {
-        foreach (Sound sound in soundsPlaying) {
+    private void followLastSound(List<Sound> soundsHeard) {
+        foreach (Sound sound in soundsHeard) {
+            if (!(Vector3.Distance(sound.Origin, agentTransform.position) < 1)) {
+                agent.SetDestination(sound.Origin);
+            }
+        }
+    }
+
+    private void reactToSounds(List<Sound> soundsHeard) {
+        foreach (Sound sound in soundsHeard) {
             reactToSound(sound);
         }
     }

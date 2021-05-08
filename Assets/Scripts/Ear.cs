@@ -19,12 +19,6 @@ public class Ear : MonoBehaviour {
 
     private void Update() {
         getSoundsHeard();
-
-        print(SoundsHeard.Count);
-
-        foreach (Sound sound in SoundsHeard) {
-            print(sound.File);
-        }
     }
 
     private void getSoundsHeard() {
