@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour {
     private NavMeshAgent agent;
     private Rigidbody rigidbody;
 
+    private Sound soundFollowing;
+
     private void Start() {
         agentTransform = GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
@@ -44,95 +46,28 @@ public class EnemyController : MonoBehaviour {
 
     private void followLastSoundSploshVolume(List<Sound> soundsHeard) {
         foreach (Sound sound in soundsHeard) {
-            if (!(Vector3.Distance(sound.Origin, agentTransform.position) < 1)) {
-                print(legs.GuessedSpeed);
+            agent.speed = legs.GuessedSpeed;
 
+            if (!(Vector3.Distance(sound.Origin, agentTransform.position) < 1)) {
                 if (sound.File == "splosh") {
-                    if (sound.getVolume() > 0.3 && sound.getVolume() < 0.8) {
-                        agent.SetDestination(sound.Origin);
-                    }
-                    else if (sound.getVolume() >= 0.8) {
-                        agent.speed = legs.PanicedSpeed;
-                        agent.SetDestination(sound.Origin);
-                    }
-                }
-                else {
+                    reactToSploshLoudness(sound);
+                } else {
                     agent.SetDestination(sound.Origin);
                 }
             }
         }
     }
 
-    private void reactToSounds(List<Sound> soundsHeard) {
-        foreach (Sound sound in soundsHeard) {
-            reactToSound(sound);
-        }
+    private void followLoudestSound(List<Sound> soundsHeard) {
+
     }
 
-    private void reactToSound(Sound sound) { 
-        switch (sound.File) {
-            case "splosh":
-                reactToSplosh(sound);
-                break;
-            case "swimming":
-                reactToSwimming(sound);
-                break;
-            case "mudfootsteps":
-                reactToMud(sound);
-                break;
-            case "metalsteps":
-                reactToMetal(sound);
-                break;
-            case "footsteps":
-                reacttoFootsteps(sound);
-                break;
-            default:
-                print("no sound detected");
-                break;
-        }
-    }
-
-    private void reactToSplosh(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
-            print("that was my own splosh and I can ignore it!");
-        }
-        else {
+    private void reactToSploshLoudness(Sound sound) {
+        if (sound.getVolume() > 0.3 && sound.getVolume() < 0.8) {
             agent.SetDestination(sound.Origin);
         }
-    }
-
-    private void reactToSwimming(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
-            print("that was my own swim and I can ignore it!");
-        }
-        else {
-            agent.SetDestination(sound.Origin);
-        }
-    }
-
-    private void reactToMud(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
-            print("that was my own mud and I can ignore it!");
-        }
-        else {
-            agent.SetDestination(sound.Origin);
-        }
-    }
-
-    private void reactToMetal(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
-            print("that was my own metal and I can ignore it!");
-        }
-        else {
-            agent.SetDestination(sound.Origin);
-        }
-    }
-
-    private void reacttoFootsteps(Sound sound) {
-        if (Vector3.Distance(sound.Origin, agentTransform.position) < 1) {
-            print("that was my own footsteps and I can ignore it!");
-        }
-        else {
+        else if (sound.getVolume() >= 0.8) {
+            agent.speed = legs.PanicedSpeed;
             agent.SetDestination(sound.Origin);
         }
     }

@@ -9,8 +9,7 @@ public static class GlobalListener {
     public static void updateSoundsPlaying(Sound sound) {
         if (!SoundsPlaying.Contains(sound)) {
             SoundsPlaying.Add(sound);
-        }
-        else {
+        } else {
             removeSoundsPlaying(sound);
             SoundsPlaying.Add(sound);
         }

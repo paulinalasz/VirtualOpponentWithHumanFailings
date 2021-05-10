@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 
 public class SFXWater : MonoBehaviour {
-    
+
     [SerializeField] AudioSource movementAudio;
     [SerializeField] AudioSource initialAudio;
 
@@ -45,8 +45,7 @@ public class SFXWater : MonoBehaviour {
         if (other.attachedRigidbody.velocity.magnitude > 0.5) {
             movement.play();
             movement.Origin = other.GetComponent<Transform>().position;
-        }
-        else if (other.attachedRigidbody.velocity.magnitude < 0.5 && other.attachedRigidbody.velocity.magnitude > 0.01) {
+        } else if (other.attachedRigidbody.velocity.magnitude < 0.5 && other.attachedRigidbody.velocity.magnitude > 0.01) {
             movement.stop();
         }
     }

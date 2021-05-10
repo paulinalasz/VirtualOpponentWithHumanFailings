@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour {
         GuessedSpeed = 3f;
         PanicedSpeed = 4f;
 
-    agent.SetDestination(agentTransform.position);
+        agent.SetDestination(agentTransform.position);
         agent.speed = WanderSpeed;
     }
 
@@ -25,6 +25,7 @@ public class EnemyMovement : MonoBehaviour {
         Vector3 newPos = findWanderDestination(agentTransform.position, destinationSetRadius, -1);
 
         agent.speed = WanderSpeed;
+        print("wander " + agent.speed);
         agent.SetDestination(newPos);
     }
 

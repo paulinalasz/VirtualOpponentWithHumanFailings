@@ -16,6 +16,14 @@ public class Sound {
         this.source.volume = volume;
     }
 
+    public Sound(AudioSource source, float volume) {
+        this.source = source;
+        this.Clip = source.clip;
+        this.File = this.Clip.name;
+
+        this.source.volume = volume;
+    }
+
     public Vector3 Origin {
         get {
             return this.origin;
