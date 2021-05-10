@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System;
 
 public class SFXWater : MonoBehaviour {
-
-    [SerializeField] AudioSource initialAudio;
+    
     [SerializeField] AudioSource movementAudio;
+    [SerializeField] AudioSource initialAudio;
 
     private Sound initial;
     private Sound movement;
@@ -31,6 +31,12 @@ public class SFXWater : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
+        float volume = other.attachedRigidbody.mass * 0.5f;
+
+        initial.setVolume(volume);
+
+        print(initial.getVolume());
+
         initial.play();
         initial.Origin = other.GetComponent<Transform>().position;
     }
