@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
 
     public Vector3 enemyPlayerPositionGuess;
 
-    [SerializeField] EnemyMovement movement;
+    [SerializeField] EnemyMovement legs;
     [SerializeField] Ear enemyEar;
 
     private Transform agentTransform;
@@ -23,19 +23,42 @@ public class EnemyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        float distance = Vector3.Distance(movement.AgentTransform.position, movement.Agent.destination);
+        float distance = Vector3.Distance(legs.AgentTransform.position, legs.Agent.destination);
 
         if (distance < 1.1f || rigidbody.velocity.magnitude < 1.3f) {
-            movement.wander();
+            legs.wander();
         }
 
-        followLastSound(enemyEar.SoundsHeard);
+        //followLastSound(enemyEar.SoundsHeard);
+        followLastSoundSploshVolume(enemyEar.SoundsHeard);
     }
 
     private void followLastSound(List<Sound> soundsHeard) {
         foreach (Sound sound in soundsHeard) {
+            agent.speed = legs.GuessedSpeed;
             if (!(Vector3.Distance(sound.Origin, agentTransform.position) < 1)) {
                 agent.SetDestination(sound.Origin);
+            }
+        }
+    }
+
+    private void followLastSoundSploshVolume(List<Sound> soundsHeard) {
+        foreach (Sound sound in soundsHeard) {
+            if (!(Vector3.Distance(sound.Origin, agentTransform.position) < 1)) {
+                print(legs.GuessedSpeed);
+
+                if (sound.File == "splosh") {
+                    if (sound.getVolume() > 0.3 && sound.getVolume() < 0.8) {
+                        agent.SetDestination(sound.Origin);
+                    }
+                    else if (sound.getVolume() >= 0.8) {
+                        agent.speed = legs.PanicedSpeed;
+                        agent.SetDestination(sound.Origin);
+                    }
+                }
+                else {
+                    agent.SetDestination(sound.Origin);
+                }
             }
         }
     }

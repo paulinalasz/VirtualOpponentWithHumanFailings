@@ -9,21 +9,22 @@ public class EnemyMovement : MonoBehaviour {
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform agentTransform;
 
-    [SerializeField] float wanderSpeed;
-    [SerializeField] float guessedSpeed;
-
     [SerializeField] float destinationSetRadius;
 
     private void Start() {
-        agent.SetDestination(agentTransform.position);
-        agent.speed = wanderSpeed;
+        WanderSpeed = 2f;
+        GuessedSpeed = 3f;
+        PanicedSpeed = 4f;
+
+    agent.SetDestination(agentTransform.position);
+        agent.speed = WanderSpeed;
     }
 
     //moves towards random navmesh area
     public void wander() {
         Vector3 newPos = findWanderDestination(agentTransform.position, destinationSetRadius, -1);
 
-        agent.speed = wanderSpeed;
+        agent.speed = WanderSpeed;
         agent.SetDestination(newPos);
     }
 
@@ -54,4 +55,8 @@ public class EnemyMovement : MonoBehaviour {
             this.agentTransform = value;
         }
     }
+
+    public float WanderSpeed { get; set; }
+    public float GuessedSpeed { get; set; }
+    public float PanicedSpeed { get; set; }
 }
