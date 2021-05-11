@@ -23,6 +23,9 @@ public class SFXWalkableSurface : MonoBehaviour {
 
     private void OnCollisionStay(Collision collision) {
         if (collision.collider.attachedRigidbody.velocity.magnitude > 0.5) {
+            float volume = collision.collider.attachedRigidbody.mass * 0.5f;
+            movement.setVolume(volume);
+
             movement.play();
             movement.Origin = collision.collider.GetComponent<Transform>().position;
         } else {

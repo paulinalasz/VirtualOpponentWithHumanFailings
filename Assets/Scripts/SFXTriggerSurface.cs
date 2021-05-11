@@ -24,6 +24,9 @@ public class SFXTriggerSurface : MonoBehaviour {
 
     protected void OnTriggerStay(Collider other) {
         if (other.attachedRigidbody.velocity.magnitude > 0.5) {
+            float volume = other.attachedRigidbody.mass * 0.5f;
+            movement.setVolume(volume);
+
             movement.play();
             movement.Origin = other.GetComponent<Transform>().position;
         } else if (other.attachedRigidbody.velocity.magnitude < 0.5 && other.attachedRigidbody.velocity.magnitude > 0.01) {

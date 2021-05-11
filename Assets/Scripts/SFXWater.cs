@@ -42,6 +42,9 @@ public class SFXWater : MonoBehaviour {
     }
 
     protected void OnTriggerStay(Collider other) {
+        float volume = other.attachedRigidbody.mass * 0.5f;
+        movement.setVolume(volume);
+
         if (other.attachedRigidbody.velocity.magnitude > 0.5) {
             movement.play();
             movement.Origin = other.GetComponent<Transform>().position;
