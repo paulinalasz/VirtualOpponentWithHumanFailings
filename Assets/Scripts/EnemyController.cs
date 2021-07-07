@@ -37,8 +37,8 @@ public class EnemyController : MonoBehaviour {
         
         if (enemyEar.SoundsHeard.Count > 0) {
             //followLastSound(enemyEar.SoundsHeard);
-            //followLastSoundSploshVolume(enemyEar.SoundsHeard);
-            followLoudestSound(enemyEar.SoundsHeard);
+            followLastSoundSploshVolume(enemyEar.SoundsHeard);
+            //followLoudestSound(enemyEar.SoundsHeard);
         }
     }
 

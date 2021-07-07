@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    private CharacterController controller;
+public class Player : MonoBehaviour {
+    
+    //private CharacterController controller; 
     [SerializeField] private int speed = 50;
+
     private int verticalMovement = 0;
     private int horizontalMovement = 0;
     private Rigidbody rigidBody;
 
     private Vector3 movement;
 
-    // Start is called before the first frame update
     void Start() {
         rigidBody = GetComponent<Rigidbody>();
     }
