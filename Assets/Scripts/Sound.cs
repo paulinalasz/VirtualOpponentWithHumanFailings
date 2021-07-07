@@ -7,13 +7,15 @@ public class Sound {
     [SerializeField] AudioSource source;
     private Vector3 origin = Vector3.zero;
     private float volume = 1;
-    
+    public int distanceHeard;
+
     public Sound(AudioSource source) {
         this.source = source;
         this.Clip = source.clip;
         this.File = this.Clip.name;
 
-        this.source.volume = volume;
+        this.source.volume = 1;
+        this.distanceHeard = 100;
     }
 
     public Sound(AudioSource source, float volume) {
@@ -22,6 +24,16 @@ public class Sound {
         this.File = this.Clip.name;
 
         this.source.volume = volume;
+        this.distanceHeard = 100;
+    }
+
+    public Sound(AudioSource source, float volume, int distanceHeard) {
+        this.source = source;
+        this.Clip = source.clip;
+        this.File = this.Clip.name;
+
+        this.source.volume = volume;
+        this.distanceHeard = distanceHeard;
     }
 
     public Vector3 Origin {

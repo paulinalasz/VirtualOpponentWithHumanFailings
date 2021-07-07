@@ -1,4 +1,4 @@
-﻿ sing UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
 
@@ -12,7 +12,7 @@ public class SFXWater : MonoBehaviour {
 
     private void Start() {
         initial = new Sound(initialAudio);
-        movement = new Sound(movementAudio);
+        movement = new Sound(movementAudio, 1, 10);
     }
 
     private void Update() {

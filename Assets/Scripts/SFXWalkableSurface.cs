@@ -9,10 +9,19 @@ public class SFXWalkableSurface : MonoBehaviour {
     private Sound movement;
 
     private void Start() {
-        movement = new Sound(movementAudio);
+        switch(movementAudio.clip.name) {
+            case "footsteps":
+                movement = new Sound(movementAudio, 0.5f, 5);
+                break;
+            default:
+                movement = new Sound(movementAudio, 1, 10);
+                break;
+        }
+        print("distance hEEEeard: " + movement.distanceHeard + " of " + movement.File);
     }
 
     private void Update() {
+        
         if (!movement.isPlaying()) {
             GlobalListener.removeSoundsPlaying(movement);
         }

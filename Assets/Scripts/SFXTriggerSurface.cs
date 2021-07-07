@@ -10,7 +10,14 @@ public class SFXTriggerSurface : MonoBehaviour {
 
     private void Start() {
         movementAudio = GetComponent<AudioSource>();
-        movement = new Sound(movementAudio);
+        switch (movementAudio.clip.name) {
+            case "mudsteps":
+                movement = new Sound(movementAudio, 0.5f, 8);
+                break;
+            default:
+                movement = new Sound(movementAudio, 1, 12);
+                break;
+        }
     }
 
     private void Update() {
