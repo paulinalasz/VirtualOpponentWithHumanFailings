@@ -7,7 +7,7 @@ public class Sound {
     [SerializeField] AudioSource source;
     private Vector3 origin = Vector3.zero;
     private float volume = 1;
-
+    
     public Sound(AudioSource source) {
         this.source = source;
         this.Clip = source.clip;

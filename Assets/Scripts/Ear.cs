@@ -8,7 +8,7 @@ public class Ear : MonoBehaviour {
 
     [SerializeField] float sploshHearingRange;
     [SerializeField] float swimmingHearingRange;
-    [SerializeField] float mudfootstepsHearingRange;
+    [SerializeField] float mudfootstepsHearingRange; 
     [SerializeField] float metalstepsHearingRange;
     [SerializeField] float footstepsHearingRange;
 

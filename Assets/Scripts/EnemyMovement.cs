@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour {
     [SerializeField] float destinationSetRadius;
 
     private void Start() {
+        //different speeds representing different behaviours
         WanderSpeed = 2f;
         GuessedSpeed = 3f;
         PanicedSpeed = 4f;

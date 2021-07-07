@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     
-    //private CharacterController controller; 
-    [SerializeField] private int speed = 50;
+    [SerializeField] private int speed = 50; //player movement speed
 
     private int verticalMovement = 0;
     private int horizontalMovement = 0;
@@ -14,17 +13,18 @@ public class Player : MonoBehaviour {
     private Vector3 movement;
 
     void Start() {
-        rigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>(); //retrieve player rigidbody
     }
 
     void Update() {
-        movementInput();
+        movementInput();  //every update check for relavent key press
     }
 
     void FixedUpdate() {
-        move();
+        move();          //every set time apply force to the player based on the key press
     }
 
+    //depending on keyboard input, set the movement direction
     private void movementInput() {
         if (Input.GetKeyDown(KeyCode.W)) {
             verticalMovement = 1;
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour {
         }
     }
 
+    //Multiply direction by the speed and apply the force to the player
     private void move() {
         movement = new Vector3(verticalMovement, 0, horizontalMovement);
         movement = movement * speed;
